@@ -20,6 +20,7 @@ class Plans extends Migration
             $table->int('persons_range_start')->nullable();
             $table->int('persons_range_end')->nullable();
             $table->string('cycle')->nullable();
+            $table->string('plan_name')->nullable()->default('Enterprise');
             $table->timestamps();
         });
     }
