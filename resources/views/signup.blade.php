@@ -67,7 +67,9 @@
                                 <!-- (Address) -->
                                 <div class="col-12 mb-4">
                                     <label for="exampleInputaddress" class="form-label linehight_19 font_16 grey ps-3">Address*</label>
-                                    <input required type="text" class="form-control linehight_19 font_16" id="pac-input" name="address" placeholder="Street Address" >
+                                    <input required type="text" class="form-control linehight_19 font_16 controls" id="pac-input" name="address" placeholder="Street Address" autocomplete="off">
+
+
                                 </div>
                                 <!-- (City) -->
                                 <div class="col-12 col-md-6 mb-4">
@@ -887,111 +889,80 @@
 </div>
 </main>
 </article>
+<div id="map"></div>
 
 @endsection
 @section('script')
 
 <script
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMLj2D4bFeoGuuVDV1H-Zn4b6FG5C0z1s&callback=initMap&libraries=places&v=weekly"
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBasphxbX9wLvunNdz479Ux8281cgUTyA8&callback=initAutocomplete&libraries=places&v=weekly"
 async
 ></script>
 
 <script>
-    {{-- Location Search Satart --}}
-    function initMap() {
-      const map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 40.749933, lng: -73.98633 },
-        zoom: 13,
-    });
-      const card = document.getElementById("pac-card");
-      const input = document.getElementById("pac-input");
-      const biasInputElement = document.getElementById("use-location-bias");
-      const strictBoundsInputElement = document.getElementById("use-strict-bounds");
-      const options = {
-        componentRestrictions: { country: "us" },
-        fields: ["formatted_address", "geometry", "name"],
-        strictBounds: false,
-        types: ["establishment"],
-    };
-    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
-    const autocomplete = new google.maps.places.Autocomplete(input, options);
-  // Bind the map's bounds (viewport) property to the autocomplete object,
-  // so that the autocomplete requests use the current map bounds for the
-  // bounds option in the request.
-  autocomplete.bindTo("bounds", map);
-  const infowindow = new google.maps.InfoWindow();
-  const infowindowContent = document.getElementById("infowindow-content");
-  infowindow.setContent(infowindowContent);
-  const marker = new google.maps.Marker({
-    map,
-    anchorPoint: new google.maps.Point(0, -29),
+ function initAutocomplete() {
+  const map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: -33.8688, lng: 151.2195 },
+    zoom: 13,
+    mapTypeId: "roadmap",
 });
-  autocomplete.addListener("place_changed", () => {
-    infowindow.close();
-    marker.setVisible(false);
-    const place = autocomplete.getPlace();
+  // Create the search box and link it to the UI element.
+  const input = document.getElementById("pac-input");
+  const searchBox = new google.maps.places.SearchBox(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  // Bias the SearchBox results towards current map's viewport.
+  map.addListener("bounds_changed", () => {
+    searchBox.setBounds(map.getBounds());
+});
+  let markers = [];
+  // Listen for the event fired when the user selects a prediction and retrieve
+  // more details for that place.
+  searchBox.addListener("places_changed", () => {
+    const places = searchBox.getPlaces();
 
-    if (!place.geometry || !place.geometry.location) {
-      // User entered the name of a Place that was not suggested and
-      // pressed the Enter key, or the Place Details request failed.
-      window.alert("No details available for input: '" + place.name + "'");
+    if (places.length == 0) {
       return;
   }
-
-    // If the place has a geometry, then present it on a map.
-    if (place.geometry.viewport) {
-      map.fitBounds(place.geometry.viewport);
-  } else {
-      map.setCenter(place.geometry.location);
-      map.setZoom(17);
-  }
-  marker.setPosition(place.geometry.location);
-  marker.setVisible(true);
-  infowindowContent.children["place-name"].textContent = place.name;
-  infowindowContent.children["place-address"].textContent =
-  place.formatted_address;
-  infowindow.open(map, marker);
-});
-
-  // Sets a listener on a radio button to change the filter type on Places
-  // Autocomplete.
-  function setupClickListener(id, types) {
-    const radioButton = document.getElementById(id);
-    radioButton.addEventListener("click", () => {
-      autocomplete.setTypes(types);
-      input.value = "";
+    // Clear out the old markers.
+    markers.forEach((marker) => {
+      marker.setMap(null);
   });
-}
-setupClickListener("changetype-all", []);
-setupClickListener("changetype-address", ["address"]);
-setupClickListener("changetype-establishment", ["establishment"]);
-setupClickListener("changetype-geocode", ["geocode"]);
-biasInputElement.addEventListener("change", () => {
-    if (biasInputElement.checked) {
-      autocomplete.bindTo("bounds", map);
-  } else {
-      // User wants to turn off location bias, so three things need to happen:
-      // 1. Unbind from map
-      // 2. Reset the bounds to whole world
-      // 3. Uncheck the strict bounds checkbox UI (which also disables strict bounds)
-      autocomplete.unbind("bounds");
-      autocomplete.setBounds({ east: 180, west: -180, north: 90, south: -90 });
-      strictBoundsInputElement.checked = biasInputElement.checked;
-  }
-  input.value = "";
-});
-strictBoundsInputElement.addEventListener("change", () => {
-    autocomplete.setOptions({
-      strictBounds: strictBoundsInputElement.checked,
-  });
+    markers = [];
+    // For each place, get the icon, name and location.
+    const bounds = new google.maps.LatLngBounds();
+    places.forEach((place) => {
+      if (!place.geometry || !place.geometry.location) {
+        console.log("Returned place contains no geometry");
+        return;
+    }
+    const icon = {
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(25, 25),
+    };
+      // Create a marker for each place.
+      markers.push(
+        new google.maps.Marker({
+          map,
+          icon,
+          title: place.name,
+          position: place.geometry.location,
+      })
+        );
 
-    if (strictBoundsInputElement.checked) {
-      biasInputElement.checked = strictBoundsInputElement.checked;
-      autocomplete.bindTo("bounds", map);
-  }
-  input.value = "";
+      if (place.geometry.viewport) {
+        // Only geocodes have viewport.
+        bounds.union(place.geometry.viewport);
+    } else {
+        bounds.extend(place.geometry.location);
+    }
+});
+    map.fitBounds(bounds);
 });
 }
+
 
 {{-- Location Searcg End --}}
 
@@ -1170,10 +1141,10 @@ $(document).ready(function(){
            },
            success:function(response){
             if(response.success == 1){
-                 $('.error-message').hide();
-            }
-           }
-       });
+             $('.error-message').hide();
+         }
+     }
+ });
 
     });
 
@@ -1201,98 +1172,6 @@ $(document).ready(function(){
         }
     });
     $(document).on('click','.get-basic-info',function(e){
-        e.preventDefault();
-        clients = $('.clients').val();
-        if(clients > 40){
-            $('.widget-subtitle').removeClass('active');
-            $('.price-calculation-area').removeClass('active');
-            $('.price-calculation-area').removeClass('show');
-            $('.planid').val('subscribe69');
-            if(clients > 300){
-                $('#enterprise-tab').addClass('active');
-                $('#enterprise').addClass('active show');
-                $('.planid').val('');
-                form_data = $('.basic-info-form').serialize();
-                $.ajax({
-                    url:"/make-plan",
-                    type:"post",
-                    data:form_data,
-                    beforeSend:function(){
-
-                    },
-                    error: function(response){
-                            //console.log(response.message);
-                            console.log(response);
-                        },
-                        success:function(response){
-                            $('.package-options').html(response);
-                            console.log(response);
-                        }
-                    });
-
-            }else{
-                $('#standard-tab').addClass('active');
-                $('#standard').addClass('active show');
-            }
-        }
-        $('#pills-home').removeClass('show');
-        $('#pills-home').removeClass('active');
-        $('#pills-home-tab').removeClass('active');
-        $('#pills-profile').addClass('show active');
-        $('#pills-profile-tab, #pills-home-tab').addClass('active');
-        var plan_name = $('.plan-name.active').data('plan');
-        $('.planname').val(plan_name);
-    });
-    $(document).on('click','.back-to-palns',function(e){
-        e.preventDefault();
-        $('#pills-contact').removeClass('show');
-        $('#pills-contact').removeClass('active');
-        $('#pills-contact-tab').removeClass('active');
-        $('#pills-profile').addClass('show active');
-        $('pills-profile-tab').addClass('active');
-    });
-
-    $(document).on('click','.back-to-basic',function(e){
-        e.preventDefault();
-
-        $('#pills-profile').removeClass('show');
-        $('#pills-profile').removeClass('active');
-        $('#pills-profile-tab').removeClass('active');
-        $('#pills-home').addClass('show active');
-        $('#pills-home-tab').addClass('active');
-    });
-    $(document).on('click','.check-plans',function(e){
-        e.preventDefault();
-
-        form_data = $('.basic-info-form').serialize();
-        $.ajax({
-            url:"/check-plan",
-            type:"post",
-            data:form_data,
-            beforeSend:function(){
-
-            },
-            error: function(response){
-
-                console.log("I am here");
-            },
-            success:function(response){
-                $('#pills-profile').removeClass('show');
-                $('#pills-profile').removeClass('active');
-                $('#pills-profile-tab').removeClass('active');
-                $('#pills-contact').addClass('show active');
-                $('#pills-contact-tab, #pills-profile-tab').addClass('active');
-                $('.planid').val(response.plan_id);
-                $('.amount-contain').html('$'+response.amount);
-                $('.plan-container').html($('.planname').val()+' Plan');
-                $('.clientss-container').html('Up to '+response.clients+' Clients');
-            }
-        })
-
-    });
-    $(document).on('click','.pay-create-account',function(e){
-        e.preventDefault();
-
         name = $('input[name="fname"]').val();
         lname = $('input[name="lname"]').val();
         cmpname = $('input[name="cmpname"]').val();
@@ -1302,31 +1181,7 @@ $(document).ready(function(){
         clientcount = $('input[name="clientcount"]').val();
         email = $('input[name="email"]').val();
         password = $('input[name="password"]').val();
-        cardname = $('input[name="cardname"]').val();
-        cardnum = $('input[name="cardnum"]').val();
-        cardexpmonth = $('select[name=cardexpmonth] option').filter(':selected').val();
-        cardcvv = $('input[name="cardcvv"]').val();
 
-        if(cardname == ''){
-            $('.error-message').show();
-            $('.error-message').html('Card Name is required');
-            return false;
-        }
-        if(cardnum == ''){
-            $('.error-message').show();
-            $('.error-message').html('Card Number is required');
-            return false;
-        }
-        if(cardexpmonth == ''){
-            $('.error-message').show();
-            $('.error-message').html('Card Expire Month is required');
-            return false;
-        }
-        if(cardcvv == ''){
-            $('.error-message').show();
-            $('.error-message').html('Card Cvv is required');
-            return false;
-        }
         if(name == ''){
             $('.error-message').show();
             $('.error-message').html('First Name is required');
@@ -1373,18 +1228,212 @@ $(document).ready(function(){
             return false;
         }
 
+        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        var phoneformat = /^\+?(\d{1,3}[\s-]?)?(\d[\s-]?)?[\(\[\s-]{0,2}?\d{2,4}[\)\]\s-]{0,2}?\d{3,4}[\s-]?(\d{3,5})?$/i;
 
-        password = SHA256(password);
-        $('input[name="password"]').val(password);
-        form_data = $('.basic-info-form').serialize();
-        $.ajax({
-            url:"https://beta.poolservice.software/api/subscribe",
-            type:"post",
-            data:form_data,
-            beforeSend:function(){
+        if(!email.match(mailformat))
+        {
+            $('.error-message').show();
+            $('.error-message').html('Please enter a valid email');
+            return false;
+        }
+        if(!mobphone.match(phoneformat))
+        {
+            $('.error-message').show();
+            $('.error-message').html('Please enter a valid phone number');
+            return false;
+        }
+        if(password.length < 6)
+        {
+            $('.error-message').show();
+            $('.error-message').html('Password should be minimum of 6  characters');
+            return false;
+        }
+        $('.error-message').hide();
+        clients = $('.clients').val();
+        if(clients > 40){
+            $('.widget-subtitle').removeClass('active');
+            $('.price-calculation-area').removeClass('active');
+            $('.price-calculation-area').removeClass('show');
+            $('.planid').val('subscribe69');
+            if(clients > 300){
+                $('#enterprise-tab').addClass('active');
+                $('#enterprise').addClass('active show');
+                $('.planid').val('');
+                form_data = $('.basic-info-form').serialize();
+                $.ajax({
+                    url:"/make-plan",
+                    type:"post",
+                    data:form_data,
+                    beforeSend:function(){
 
-            },
-            error: function(response){
+                    },
+                    error: function(response){
+                            //console.log(response.message);
+                            console.log(response);
+                        },
+                        success:function(response){
+                            $('.package-options').html(response);
+                            console.log(response);
+                        }
+                    });
+
+            }else{
+                $('#standard-tab').addClass('active');
+                $('#standard').addClass('active show');
+
+            }
+        }
+        $('#pills-home').removeClass('show');
+        $('#pills-home').removeClass('active');
+        $('#pills-home-tab').removeClass('active');
+        $('#pills-profile').addClass('show active');
+        $('#pills-profile-tab, #pills-home-tab').addClass('active');
+        $( "#pills-profile-tab" ).scroll();
+        var plan_name = $('.plan-name.active').data('plan');
+        $('.planname').val(plan_name);
+    });
+$(document).on('click','.back-to-palns',function(e){
+    $('#pills-contact').removeClass('show');
+    $('#pills-contact').removeClass('active');
+    $('#pills-contact-tab').removeClass('active');
+    $('#pills-profile').addClass('show active');
+    $('pills-profile-tab').addClass('active');
+});
+
+$(document).on('click','.back-to-basic',function(e){
+
+
+    $('#pills-profile').removeClass('show');
+    $('#pills-profile').removeClass('active');
+    $('#pills-profile-tab').removeClass('active');
+    $('#pills-home').addClass('show active');
+    $('#pills-home-tab').addClass('active');
+});
+$(document).on('click','.check-plans',function(e){
+
+
+    form_data = $('.basic-info-form').serialize();
+    $.ajax({
+        url:"/check-plan",
+        type:"post",
+        data:form_data,
+        beforeSend:function(){
+
+        },
+        error: function(response){
+
+            console.log("I am here");
+        },
+        success:function(response){
+            $('#pills-profile').removeClass('show');
+            $('#pills-profile').removeClass('active');
+            $('#pills-profile-tab').removeClass('active');
+            $('#pills-contact').addClass('show active');
+            $('#pills-contact-tab, #pills-profile-tab').addClass('active');
+            $('.planid').val(response.plan_id);
+            $('.amount-contain').html('$'+response.amount);
+            $('.plan-container').html($('.planname').val()+' Plan');
+            $('.clientss-container').html('Up to '+response.clients+' Clients');
+        }
+    })
+
+});
+$(document).on('click','.pay-create-account',function(e){
+    e.preventDefault();
+
+    name = $('input[name="fname"]').val();
+    lname = $('input[name="lname"]').val();
+    cmpname = $('input[name="cmpname"]').val();
+    address = $('input[name="address"]').val();
+    country = $('input[name="country"]').val();
+    mobphone = $('input[name="mobphone"]').val();
+    clientcount = $('input[name="clientcount"]').val();
+    email = $('input[name="email"]').val();
+    password = $('input[name="password"]').val();
+    cardname = $('input[name="cardname"]').val();
+    cardnum = $('input[name="cardnum"]').val();
+    cardexpmonth = $('select[name=cardexpmonth] option').filter(':selected').val();
+    cardcvv = $('input[name="cardcvv"]').val();
+
+    if(cardname == ''){
+        $('.error-message').show();
+        $('.error-message').html('Card Name is required');
+        return false;
+    }
+    if(cardnum == ''){
+        $('.error-message').show();
+        $('.error-message').html('Card Number is required');
+        return false;
+    }
+    if(cardexpmonth == ''){
+        $('.error-message').show();
+        $('.error-message').html('Card Expire Month is required');
+        return false;
+    }
+    if(cardcvv == ''){
+        $('.error-message').show();
+        $('.error-message').html('Card Cvv is required');
+        return false;
+    }
+    if(name == ''){
+        $('.error-message').show();
+        $('.error-message').html('First Name is required');
+        return false;
+    }
+    if(lname == ''){
+        $('.error-message').show();
+        $('.error-message').html('Last Name is required');
+        return false;
+    }
+    if(cmpname == ''){
+        $('.error-message').show();
+        $('.error-message').html('Business Name is required');
+        return false;
+    }
+    if(address == ''){
+        $('.error-message').show();
+        $('.error-message').html('Address is required');
+        return false;
+    }
+    if(country == ''){
+        $('.error-message').show();
+        $('.error-message').html('Country is required');
+        return false;
+    }
+    if(mobphone == ''){
+        $('.error-message').show();
+        $('.error-message').html('Mobile Phone is required');
+        return false;
+    }
+    if(clientcount == ''){
+        $('.error-message').show();
+        $('.error-message').html('Client Count Phone is required');
+        return false;
+    }
+    if(email == ''){
+        $('.error-message').show();
+        $('.error-message').html('email is required');
+        return false;
+    }
+    if(password == ''){
+        $('.error-message').show();
+        $('.error-message').html('Password is required');
+        return false;
+    }
+
+
+    password = SHA256(password);
+    $('input[name="password"]').val(password);
+    form_data = $('.basic-info-form').serialize();
+    $.ajax({
+        url:"https://beta.poolservice.software/api/subscribe",
+        type:"post",
+        data:form_data,
+        beforeSend:function(){
+
+        },
+        error: function(response){
                             //console.log(response.message);
                             console.log("I am here");
                         },
@@ -1393,7 +1442,7 @@ $(document).ready(function(){
                         }
                     })
 
-    });
+});
 }
 );
 
