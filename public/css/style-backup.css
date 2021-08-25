@@ -1,0 +1,1210 @@
+/** ========== Google Fonts ============= **/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap');
+
+/** ========== Global CSS ============= **/
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-style: normal;
+    font-weight: normal;
+    font-family: Roboto;
+}
+
+body {
+    box-sizing: border-box;
+    list-style-type: none;
+    width: 100%;
+}
+
+hr {
+    margin: 2rem 0 !important;
+    color: #fff !important;
+    border: 1px solid hsla(0, 0%, 78%, 1) !important;
+    height: 4px !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+img {
+    width: auto;
+    height: auto;
+}
+
+li {
+    list-style-type: none;
+}
+
+label {
+    padding-left: 20px;
+}
+
+.icons {
+    margin-right: 6px;
+    width: auto;
+    height: 100%;
+}
+
+.custom-container {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-wrapper {
+    width: 100%;
+}
+
+
+/** ========== Color's CSS ============= **/
+
+.lighten-gray {
+    background-color: #EFF1F2 !important;
+}
+
+.form-text-color {
+    font-family: Roboto;
+    font-size: 16px;
+    line-height: 19px;
+    color: #474747;
+}
+
+.blue-bg {
+    background: linear-gradient(105.13deg, #3564AC 13.37%, #4497E1 135.07%);
+}
+
+.green-bg {
+    background: linear-gradient(90deg, #91BD40 -36.59%, #98DA20 104.47%);
+}
+
+.blue {
+    background-image: linear-gradient(105.13deg, #3564AC 13.37%, #4497E1 135.07%);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.green {
+    background-image: linear-gradient(90deg, #91BD40 -36.59%, #98DA20 104.47%) !important;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.white {
+    color: #fff !important;
+}
+
+.grey {
+    color: #474747;
+}
+
+
+/** ========== Reuseable CSS ============= **/
+
+.signup-subtitle {
+    font-family: Roboto;
+    font-size: 30px;
+    line-height: 35px;
+    color: #474747;
+}
+
+.form-icon {
+    position: absolute;
+    left: 28px;
+}
+
+.contact-form {
+    overflow: hidden;
+    border: 0px transparent !important;
+}
+
+.text-14 {
+    font-size: 14px;
+    line-height: 20px;
+    font-family: Roboto;
+}
+
+.pay-btn {
+    font-family: Roboto;
+    width: 344px;
+    height: 68px;
+    display: block;
+    border-radius: 100px;
+    flex-direction: column;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.lock-icon {
+    position: absolute;
+    left: 56px;
+}
+
+.pay-text {
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.coupon-btn {
+    border-radius: 0px;
+    width: 116px;
+    height: 39px;
+    display: block;
+}
+
+.caret-icon {
+    position: absolute;
+    right: 20px;
+}
+
+.linehight-42 {
+    line-height: 42px;
+}
+
+.form-md-padding {
+    padding: 81px 42px;
+}
+
+.p-payment-method {
+    padding: 60px;
+}
+
+.form-width {
+    width: 573px;
+    margin: 0 auto;
+}
+
+.b-10-radious {
+    border-radius: 10px !important;
+}
+
+.item-text {
+    font-family: Roboto;
+    font-size: 16px !important;
+    line-height: 34px;
+    color: #858383;
+}
+
+.style-italic {
+    font-style: italic;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.form-input-padding {
+    padding-left: 70px !important;
+}
+
+.roboto {
+    font-family: 'Roboto' !important;
+}
+
+.form-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.widget-shadow {
+    border: 1px solid #EFF1F2;
+    box-shadow: 1px 2px 8px 0px #3564ac40;
+    padding: 60px 30px;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.app-container {
+    width: 1060px;
+    margin: 0 auto;
+}
+
+.padding-container-left {
+    padding-left: 114px;
+}
+
+.slider-text {
+    margin-top: 80px;
+}
+
+.tag-title {
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 50px;
+}
+
+.work-text {
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #858383;
+}
+
+.wrap-text {
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #858383;
+}
+
+.name-title {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21px;
+    color: #474747;
+    padding-top: 25px;
+    display: block;
+}
+
+.paragraph {
+    font-family: Rubik;
+    font-size: 16px;
+    line-height: 19px;
+    color: #858383;
+}
+
+.widget-subtitle {
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.primary-padding {
+    padding-bottom: 8rem;
+}
+
+
+/** ========== Buttons CSS ============= **/
+
+.button {
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 100px;
+}
+
+.form-button {
+    font-family: Roboto;
+    font-size: 20px;
+    line-height: 23px;
+    color: #FFFFFF;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.download-btn {
+    width: 123px !important;
+}
+
+.banner-demo-btn {
+    border: 2px solid #3C7DE1 !important;
+}
+
+.see-more {
+    border: 2px solid linear-gradient(90deg, #91BD40 -36.59%, #98DA20 104.47%);
+    width: 197px;
+    height: 45px;
+}
+
+.pricing-btn {
+    background: #FBE310;
+    width: 134.63px;
+    height: 37.7px;
+    color: #474747;
+}
+
+.login-btn {
+    width: 115px;
+    height: 37px;
+    font-size: 14px;
+    border: 2px solid rgba(145, 189, 64, 1);
+    background-color: transparent;
+}
+
+.md-btn {
+    width: 195px !important;
+    height: 50px;
+}
+
+
+/** ========== Section (Header CSS) ============= **/
+
+header {
+    background-color: #fff;
+    z-index: 99999;
+    position: fixed;
+    z-index: 9999999999999999;
+    width: 100%;
+    top: 0;
+}
+
+header .nav-link {
+    color: rgba(53, 100, 172, 1) !important;
+    font-family: 'Roboto';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.41px;
+    padding: 0px 17px !important;
+}
+
+header .navbar-brand {
+    margin: 0px;
+    padding: 0px;
+    width: 266px;
+    height: auto;
+}
+
+header li.nav-item::before {
+    content: '';
+    width: 3px;
+    height: 3px;
+    background-color: rgba(53, 100, 172, 1) !important;
+    position: absolute;
+    top: 42px;
+    border-radius: 50%;
+    color: rgba(53, 100, 172, 1) !important;
+}
+
+header li.nav-item:first-child::before {
+    display: none;
+}
+
+main {
+    padding-top: 83px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%
+}
+
+
+/** ========== Section (Banner CSS) ============= **/
+
+.banner {
+    margin-top: 40px;
+}
+
+.banner .tagline span {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.banner .title h1 {
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 50px;
+    line-height: 59px;
+}
+
+.banner p {
+    color: rgba(133, 131, 131, 1);
+    font-size: 16px;
+    line-height: 19px;
+}
+
+
+/** ========== Section (Feature CSS) ============= **/
+
+.features .tabs p.text-wrap {
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+}
+
+.features .tabs .tab-content ul li {
+    font-size: 16px;
+    line-height: 34px;
+    color: #858383;
+}
+
+.features .tabs .tab-content .logo-routes bold {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    color: #231F20;
+}
+
+.features .tabs .tab-content .quote {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    color: #231F20;
+}
+
+.features .tabs .tab-content .tab-content-right {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.features .tabs .nav-pills .nav-link {
+    width: 100%;
+    height: 100%;
+}
+
+.features .tabs .nav-pills .nav-link .blue-icon {
+    display: none;
+}
+
+.features .tabs .nav-pills .nav-link.active>.blue-icon {
+    display: block !important;
+}
+
+.features .tabs .nav-pills .nav-link.active>.white-icon {
+    display: none !important;
+}
+
+.features .tabs .nav-pills .nav-link.active>p.text-wrap {
+    background: linear-gradient(90deg, #91BD40 -36.59%, #98DA20 104.47%);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    border-bottom: 5px solid #91bd40;
+    /* transition: color 0.3s ease; */
+    transition: 1s ease-in-out;
+    padding-bottom: 10px;
+    margin-bottom: 0;
+}
+
+.features .tabs .nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: #fff !important;
+    transition: background-color 2s, transform 2s;
+}
+
+
+/** ========== Section (Our Clients CSS) ============= **/
+
+.we-work {
+    background-color: #F7FAFD;
+    padding-top: 87px;
+    padding-bottom: 48px;
+}
+
+.we-work .works-with {
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 43px;
+}
+
+.we-work .work-history {
+    background: #FFFFFF;
+    box-shadow: 1px 2px 8px 0px #3564AC40;
+    border-radius: 10px;
+    border: 1px solid #C8C8C8;
+    padding: 43px;
+}
+
+
+/** ========== Section (Our_App_Slider CSS) ============= **/
+
+.slider-block__main {
+    position: relative;
+    z-index: 2;
+}
+
+.ui-slider__all {
+    position: relative;
+    overflow: hidden;
+}
+
+.ui-slider__list-wrap.loaded .ui-slider__bg,
+.ui-slider__list-wrap.loaded img {
+    opacity: 0;
+}
+
+.ui-slider__list {
+    position: relative;
+    z-index: 1;
+    overflow: visible !important;
+}
+
+.ui-slider__list .slick-list,
+.ui-slider__list .slick-track {
+    overflow: visible !important;
+}
+
+.ui-slider__bg {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.ui-slider__bg-left {
+    width: 387px;
+    height: 510px;
+    margin: 0;
+    position: absolute;
+    bottom: 171px;
+    left: 0;
+}
+
+.ui-slider__bg-right {
+    width: 461px;
+    height: 519px;
+    margin: 0;
+    position: absolute;
+    bottom: 192px;
+    right: -62px;
+}
+
+.ui-slider__image-wrap {
+    height: 690px;
+    position: relative;
+    -webkit-transition: 0.5s ease-out;
+    -ms-transition: 0.5s ease-out;
+    transition: 0.5s ease-out;
+    opacity: 0;
+    -webkit-transform: scale(0.2);
+    -ms-transform: scale(0.2);
+    transform: scale(0.2);
+}
+
+.ui-slider__image {
+    width: 329px;
+    margin: 0 0 0 -164.5px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    box-shadow: 0 10px 20px rgba(47, 21, 135, 0.18);
+    border-radius: 20px;
+}
+
+.ui-slider__item {
+    position: relative;
+}
+
+.ui-slider__item.active-1 {
+    z-index: 1;
+}
+
+.ui-slider__item.active-1 .ui-slider__image-wrap {
+    opacity: 1;
+    -webkit-transform: scale(0.71);
+    -ms-transform: scale(0.71);
+    transform: scale(0.71);
+}
+
+.ui-slider__item.active-2 {
+    z-index: 2;
+}
+
+.ui-slider__item.active-2 .ui-slider__image-wrap {
+    opacity: 1;
+    -webkit-transform: scale(0.855);
+    -ms-transform: scale(0.855);
+    transform: scale(0.855);
+    left: -25px;
+}
+
+.ui-slider__item.active-3 {
+    z-index: 3;
+}
+
+.ui-slider__item.active-3 .ui-slider__image-wrap {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+}
+
+.ui-slider__item.active-4 {
+    z-index: 2;
+}
+
+.ui-slider__item.active-4 .ui-slider__image-wrap {
+    opacity: 1;
+    -webkit-transform: scale(0.855);
+    -ms-transform: scale(0.855);
+    transform: scale(0.855);
+    left: 25px;
+}
+
+.ui-slider__item.active-5 {
+    z-index: 1;
+}
+
+.ui-slider__item.active-5 .ui-slider__image-wrap {
+    opacity: 1;
+    -webkit-transform: scale(0.71);
+    -ms-transform: scale(0.71);
+    transform: scale(0.71);
+}
+
+.arrows-1 .slick-prev:before {
+    background: url("../images/slider-arrow.svg") 0 0/100% 100% no-repeat;
+}
+
+.arrows-1 .slick-next:before {
+    background: url("../images/slider-arrow-next.svg") 0 0/100% 100% no-repeat;
+}
+
+.arrows-1 .slick-next,
+.arrows-1 .slick-prev {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 290px;
+    left: -142px;
+    z-index: 2;
+    opacity: .5;
+    -webkit-transition: .3s ease-out;
+    -ms-transition: .3s ease-out;
+    transition: .3s ease-out;
+    background-color: #000;
+    border-radius: 50%;
+    border: none;
+}
+
+.arrows-1 .slick-next:before,
+.arrows-1 .slick-prev:before {
+    content: "";
+    width: 36px;
+    height: 16px;
+    position: absolute;
+    top: 34%;
+    left: 6px;
+}
+
+.slick-next,
+.slick-prev {
+    position: relative;
+}
+
+.arrows-1 .slick-next {
+    left: auto;
+    right: -142px;
+}
+
+.slick-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 34px;
+}
+
+.slick-dots li button:before {
+    font-family: 'slick';
+    font-size: 60px;
+    line-height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    content: '•';
+    text-align: center;
+    opacity: .25;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.slick-dots li {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.slick-dots li button {
+    font-size: 0;
+    line-height: 0;
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+    cursor: pointer;
+    color: transparent;
+    border: 0;
+    outline: none;
+    background: transparent;
+}
+
+.slick-dots li button:hover,
+.slick-dots li button:focus {
+    outline: none;
+}
+
+.slick-dots li.slick-active button:before {
+    opacity: .75;
+    color: #fff;
+}
+
+.slick-dots li button:hover:before,
+.slick-dots li button:focus:before {
+    opacity: 1;
+}
+
+
+/** ========== Section (Pricing Table CSS) ============= **/
+
+.pricing-table {
+    margin-bottom: 100px;
+}
+
+.price {
+    background-image: url(../images/frame.png);
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    width: 100%;
+    height: 500px;
+}
+
+.pricing-table .price .per-month {
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.pricing-table .price .pricing-subtitle {
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 26px;
+    text-align: center;
+    color: #474747;
+    padding-bottom: 25px;
+    padding-top: 30px;
+}
+
+.pricing-table .price .pricing-body {
+    padding: 8px 50px;
+    text-align: left;
+}
+
+.pricing-table .price .header-bg {
+    background-image: url(../images/pricing-head.svg);
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+    height: 177.8px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 42px;
+    color: #FFFFFF;
+    top: 22px;
+    flex-direction: column;
+    position: relative;
+}
+
+
+/** ========== Section (Customer Support CSS) ============= **/
+
+.customer-support {
+    margin-bottom: 100px;
+}
+
+.box-shadow {
+    box-shadow: 1px 2px 8px 0px #3564AC40;
+    border: 1px solid #C8C8C8;
+    padding: 40px 50px 0px 0px;
+}
+
+
+/** ==========  Customer-Reviews && Customer-Cards CSS ============= **/
+
+.customer-reviews {
+    background-color: transparent !important;
+    padding-top: 0;
+}
+
+.customer-cards {
+    background: #F7FAFD;
+    margin-top: 50px;
+    padding-bottom: 86px;
+    margin-bottom: 100px;
+}
+
+.customer-cards .card-body {
+    padding: 60px 40px 25px 40px;
+}
+
+.customer-cards .card {
+    box-shadow: 1px 2px 8px 0px #3564AC40;
+    margin-top: -35px;
+}
+
+.avatr {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50px);
+    top: -49px;
+}
+
+
+/** ==========  Section Get_App Css ============= **/
+
+.get-app {
+    position: relative;
+    margin-bottom: 100px;
+}
+
+.get-app .mobile-equipment {
+    position: absolute;
+    top: 123px;
+    right: 55%;
+}
+
+
+/** ==========  Section Contact_Us Css ============= **/
+
+.widget-contact {
+    margin-bottom: -204px;
+    position: relative;
+    z-index: 999999;
+}
+
+.contact-form .form-control {
+    background: #EFF1F2;
+    border: none;
+    border-radius: 100px;
+    color: #C8C8C8;
+    font-size: 16px;
+    line-height: 19px;
+    font-family: Roboto;
+    height: 45px;
+}
+
+.widget-contact .form-padding {
+    padding-top: 100px;
+}
+
+
+/** ==========  Section Footer_main Css ============= **/
+
+.footer {
+    position: relative;
+    background-image: url("../images/footer-background.svg");
+    background-size: cover;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
+.footer .footer-content {
+    padding-top: 230px;
+    padding-bottom: 10px;
+}
+
+.footer .navbar-nav {
+    flex-direction: row;
+    color: #fff;
+    justify-content: flex-end;
+}
+
+.footer .nav-item {
+    margin-left: 40px;
+}
+
+.footer .nav-link {
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+}
+
+.footer .footer-logo {
+    padding: 35px 18px;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.footer .nav-link:focus,
+.footer .nav-link:hover {
+    background: linear-gradient(90deg, #91BD40 -36.59%, #98DA20 104.47%);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.footer .footer-text {
+    font-size: 14px;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+
+
+/** ==========  Page Login Form Swith_Button Css ============= **/
+
+.btn-switch {
+    position: relative;
+    display: inline-block;
+    width: 41px;
+    height: 20px;
+}
+
+.btn-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.btn-switch .Toggler {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.btn-switch .Toggler:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: -2px;
+    bottom: -3px;
+    background-color: #C4C4C4;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.btn-switch input:checked+.Toggler {
+    background: linear-gradient(90deg, #91BD40 -36.59%, #98DA20 104.47%);
+}
+
+.btn-switch input:focus+.Toggler {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+.btn-switch input:checked+.Toggler:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.btn-switch .Toggler.round {
+    border-radius: 34px;
+}
+
+.btn-switch .Toggler.round:before {
+    border-radius: 50%;
+}
+
+
+/** ==========  Page Sign_Up Form Css ============= **/
+
+.page-sign-up .signup-tab-form .tilt-line .nav-item {
+    width: 98px !important;
+    display: block;
+    text-align: center;
+    height: auto;
+    position: relative;
+    z-index: 999;
+    background: #fff;
+    height: auto !important;
+}
+
+.page-sign-up .signup-tab-form .tilt-line .nav-link {
+    width: 62px;
+    height: 62px;
+    border-radius: 50% !important;
+    margin: 0 auto;
+    color: #474747;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    border: 1px solid hsla(0, 0%, 74%, 1)
+}
+
+.page-sign-up .nav-pills .nav-link.active,
+.page-sign-up .nav-pills .show>.nav-link {
+    background: linear-gradient(105.13deg, #3564AC 13.37%, #4497E1 135.07%);
+    transition: 1s ease-in-out;
+    border: 0px;
+    color: #fff;
+}
+
+.page-sign-up .nav-link.active+.form-text-color {
+    color: #0d6efd;
+}
+
+.page-sign-up .signup-form-width {
+    position: relative;
+    width: 575px;
+}
+
+.page-sign-up .nav.tilt-line::before {
+    width: 80%;
+}
+
+.page-sign-up .tilt-line::before {
+    content: "";
+    position: absolute;
+    left: 80px;
+    right: 0;
+    height: 1px;
+    background: #000;
+    width: 0;
+    top: 32px;
+    transition: 1s ease-in-out;
+}
+
+.page-sign-up .button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 348px;
+    height: 63px;
+    padding: 10px;
+    background: #C4C4C4;
+    border-radius: 100px;
+    position: relative;
+}
+
+.page-sign-up .button-group::before {
+    content: '';
+    position: absolute;
+    width: 50%;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    margin: 8px;
+    border-radius: 100px;
+    background: linear-gradient(105.13deg, #3564AC 13.37%, #4497E1 135.07%);
+}
+
+.page-sign-up .button-group.left::before {
+    transform: translatex(0);
+    transition: all 0.8s cubic-bezier(1, -0.01, 0, 1.01);
+}
+
+.page-sign-up .button-group.right::before {
+    transform: translatex(calc(100% - 20px));
+    transition: all 0.8s cubic-bezier(1, -0.01, 0, 1.01);
+}
+
+.page-sign-up .button-group .button {
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    color: #4d4d4d;
+    transition: color 0.8s cubic-bezier(1, -0.01, 0, 1.01);
+}
+
+.page-sign-up .button-group .button.active {
+    color: #fff;
+    transition: color 0.8s cubic-bezier(1, -0.01, 0, 1.01);
+}
+
+.page-sign-up .signup-tab-form .data {
+    padding: 56px 30px 38px 30px;
+    background: #F7FAFD;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.page-sign-up .signup-tab-form .cell-lg {
+    width: 56% !important;
+}
+
+.page-sign-up .signup-tab-form .data--table {
+    width: 181px;
+}
+
+.page-sign-up .signup-tab-form .pool-training .header {
+    padding: 41px 46px;
+    background: hsla(0, 0%, 78%, 1);
+    color: #474747 !important;
+}
+
+.page-sign-up .signup-tab-form .pool-training .header:hover {
+    background: linear-gradient(105.13deg, #3564AC 13.37%, #4497E1 135.07%);
+    color: #fff !important;
+    cursor: pointer;
+}
+
+.page-sign-up .signup-tab-form .pool-training .text {
+    padding: 50px;
+}
+
+.page-sign-up .signup-tab-form .pool-training .plans--text {
+    font-family: Roboto;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    height: 100%;
+}
+
+.page-sign-up .signup-tab-form .tab-content .order-summary .card {
+    width: 54px;
+    height: 54px;
+    background: #FFFFFF;
+    border-radius: 0px;
+}
+
+.page-sign-up .signup-tab-form .tab-content .order-summary .coupon-field {
+    width: 209px;
+    height: 39px;
+    border-radius: 0;
+}
+
+
+/** ==========  Page Sign_Up Form (Plan Subscription_Tabs) Css ============= **/
+
+.page-sign-up .tab-item .nav-link {
+    border-radius: 0px !important;
+    width: 100%;
+    height: 100%;
+    background: #C8C8C8;
+}
+
+.page-sign-up .signup-tab-form .nav-pills .tab-item {
+    width: 162px;
+    height: 154px;
+}
+
+.page-sign-up .signup-tab-form .planing-tabs .client-count {
+    width: 60%;
+}
+
+.page-sign-up .signup-tab-form .planing-tabs .client-count .form-group {
+    width: 40%;
+}
+label.error{
+    color:red;
+}

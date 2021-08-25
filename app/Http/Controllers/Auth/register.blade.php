@@ -1,0 +1,1 @@
+<h1>This is registeraton view</h1>
