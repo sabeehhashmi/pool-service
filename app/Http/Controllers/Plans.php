@@ -25,7 +25,8 @@ class Plans extends Controller
         //$stripe->coupons()->find($coupon);
         $coupons = $stripe->coupons()->find($coupon);
         if(!empty($coupons)){
-            return array('success'=>1);
+
+            return array('success'=>1,'percent_off'=>$coupons['percent_off']);
         }
         else
         {

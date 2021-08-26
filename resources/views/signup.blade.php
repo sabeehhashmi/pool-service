@@ -42,6 +42,7 @@
                     <input type="hidden"  name="planname" class="planname" >
                     <input type="hidden"  name="plan_cycle" class="plan_cycle" value="month">
                     <input type="hidden"  name="coupon" class="coupon_verified" value="no">
+                    <input type="hidden"  name="amount" class="amount" >
                     <input type="hidden"  name="device" class="device" >
                     <input type="hidden"  name="osname" class="osname" >
                     <input type="hidden"  name="utcoffset" class="utcoffset" >
@@ -85,15 +86,8 @@
                                 <div class="col-12 mb-4">
                                     <div class="form-group">
                                         <label for="exampleInputClient" class="form-label linehight_19 font_16 grey ps-3">Country*</label>
-                                        <span class="form-input">
-                                            <select class="form-control linehight_19 font_16" id="" aria-placeholder="United States" name="country">
-                                                <option>United States</option>
-                                                <option>Dalas</option>
-                                                <option>USA</option>
-                                                <option></option>
-                                            </select>
-                                            <img src="images/caret.svg" class="img-fluid caret-icon" alt="User icon">
-                                        </span>
+                                         <input required type="text" class="form-control linehight_19 font_16" id="exampleInputState" aria-describedby="NameHelp" name="country" placeholder="country">
+
                                     </div>
                                 </div>
                                 <!-- (Mobile_Number) -->
@@ -859,12 +853,12 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <p class=" linehight_19 font_20 grey text-white">Discount</p>
-                        <p class=" linehight_19 font_16 grey text-white"> - </p>
+                        <p class=" linehight_19 font_16 grey text-white discount-contain"> - </p>
                     </div>
                     <hr>
                     <div class="d-flex align-items-center justify-content-between pb-3">
                         <h6 class="widget-subtitle text-white bold">Total</h6>
-                        <h6 class="widget-subtitle text-white bold amount-contain">$99.50</h6>
+                        <h6 class="widget-subtitle text-white bold amount-contain total-amount-contain">$99.50</h6>
                     </div>
                     <p class="font_14 text-white pb-5">All subscription plans will be automatically renewed using the payment method you provide today. You may cancel at anytime to avoid future charges. By clicking “Pay & Create Account”, you agree to Pool Service
                         Software
@@ -1124,6 +1118,7 @@ $(document).ready(function(){
 
 
     $(document).on('click','.apply-coupon',function(e){
+        e.preventDefault();
         form_data = $('.coupon_check').serialize();
 
         $.ajax({
@@ -1142,6 +1137,13 @@ $(document).ready(function(){
            success:function(response){
             if(response.success == 1){
              $('.error-message').hide();
+             amount = $('.amount').val();
+             percent_off= parseFloat(response.percent_off);
+
+             dsicount = parseFloat((amount/100)*percent_off);
+             amount = parseFloat(amount - dsicount);
+             $('.total-amount-contain').html('$'+amount.toFixed(2));
+             $('.discount-contain').html('$'+dsicount.toFixed(2));
          }
      }
  });
@@ -1326,13 +1328,16 @@ $(document).on('click','.check-plans',function(e){
             console.log("I am here");
         },
         success:function(response){
+            var amount =  parseFloat(response.amount);
+             amount = amount.toFixed(2);
             $('#pills-profile').removeClass('show');
             $('#pills-profile').removeClass('active');
             $('#pills-profile-tab').removeClass('active');
             $('#pills-contact').addClass('show active');
             $('#pills-contact-tab, #pills-profile-tab').addClass('active');
             $('.planid').val(response.plan_id);
-            $('.amount-contain').html('$'+response.amount);
+            $('.amount-contain').html('$'+amount);
+            $('.amount').val(amount);
             $('.plan-container').html($('.planname').val()+' Plan');
             $('.clientss-container').html('Up to '+response.clients+' Clients');
         }
